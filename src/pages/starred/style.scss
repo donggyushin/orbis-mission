@@ -1,0 +1,22 @@
+@import "src/constants/constants.scss";
+
+.starred__container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  .row {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .textfield {
+      width: 90%;
+      height: 32px;
+      outline: none;
+    }
+  }
+  .articles {
+    margin-top: 50px;
+    margin-bottom: 120px;
+  }
+}

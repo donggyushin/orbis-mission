@@ -1,24 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+
+import React, { useEffect, useState } from "react";
+
+import Articles from "./pages/articles/Articles";
+import { NAVIGATION_STRING_TYPE } from "./types/Types";
+import Navigation from "./components/navigation/Navigation";
+import Starred from "./pages/starred/Starred";
+import { fetchingStarredArticles } from "./actions/StarredArticleActions";
+import { useDispatch } from "react-redux";
 
 function App() {
+  const dispatch = useDispatch();
+  const [tabValue, setTabValue] = useState<NAVIGATION_STRING_TYPE>("articles");
+  const handleChange = (
+    _: React.ChangeEvent<{}>,
+    value: NAVIGATION_STRING_TYPE
+  ) => {
+    setTabValue(value);
+  };
+
+  useEffect(() => {
+    callFetchingStarredArticles();
+  }, []);
+
+  const callFetchingStarredArticles = () => {
+    dispatch(fetchingStarredArticles());
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <Navigation tabValue={tabValue} handleChange={handleChange} />
+      <div className="app__container">
+        {tabValue === "articles" ? <Articles /> : <Starred />}
+      </div>
     </div>
   );
 }
