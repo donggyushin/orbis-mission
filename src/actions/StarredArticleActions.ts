@@ -18,14 +18,15 @@ export const removeStarredArticle = (articleToDelete: ARTICLE) => (
   const updatedArticles = starredArticles.filter(
     (article) => article._id !== articleToDelete._id
   );
+
+  dispatch({
+    type: REMOVE_STARRED_ARTICLE,
+    payload: updatedArticles,
+  });
   localStorage.setItem(
     STARRED_ARTICLES_LOCALSTORAGE,
     JSON.stringify(updatedArticles)
   );
-  return dispatch({
-    type: REMOVE_STARRED_ARTICLE,
-    payload: updatedArticles,
-  });
 };
 
 export const addStarredArticle = (newArticle: ARTICLE) => (
@@ -35,14 +36,14 @@ export const addStarredArticle = (newArticle: ARTICLE) => (
   const starredArticles = getState().StarredArticleReducer.articles;
   starredArticles.push(newArticle);
 
+  dispatch({
+    type: ADD_STARRED_ARTICLE,
+    payload: starredArticles,
+  });
   localStorage.setItem(
     STARRED_ARTICLES_LOCALSTORAGE,
     JSON.stringify(starredArticles)
   );
-  return dispatch({
-    type: ADD_STARRED_ARTICLE,
-    payload: starredArticles,
-  });
 };
 
 export const fetchingStarredArticles = () => (
@@ -53,7 +54,7 @@ export const fetchingStarredArticles = () => (
   );
   if (!starredArticlesString) return;
   const starredArticles = JSON.parse(starredArticlesString) as ARTICLE[];
-  return dispatch({
+  dispatch({
     type: FETCHING_STARRED_ARTICLES,
     payload: starredArticles,
   });

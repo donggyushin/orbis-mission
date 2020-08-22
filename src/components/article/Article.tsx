@@ -70,12 +70,13 @@ const Article: React.FunctionComponent<Props> = ({
             onClick={toggleStarred}
           />
         )}
-
-        <img
-          onClick={() => goToReadArticle(article.web_url)}
-          src={`${NYTIMES_ENDPOINT}${article.multimedia[0].url}`}
-          alt={article.multimedia[0].type}
-        />
+        {article.multimedia.length >= 1 && (
+          <img
+            onClick={() => goToReadArticle(article.web_url)}
+            src={`${NYTIMES_ENDPOINT}${article.multimedia[0].url}`}
+            alt={article.multimedia[0].type}
+          />
+        )}
       </div>
     </div>
   );
