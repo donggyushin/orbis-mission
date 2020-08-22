@@ -34,7 +34,7 @@ export const addStarredArticle = (newArticle: ARTICLE) => (
   getState: () => RootState
 ) => {
   const starredArticles = getState().StarredArticleReducer.articles;
-  starredArticles.push(newArticle);
+  starredArticles.unshift(newArticle);
 
   dispatch({
     type: ADD_STARRED_ARTICLE,

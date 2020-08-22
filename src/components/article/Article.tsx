@@ -48,11 +48,30 @@ const Article: React.FunctionComponent<Props> = ({
     });
   };
 
+  const returnStringin30 = (text: string): string => {
+    let count = 0;
+    let returnText = "";
+
+    for (let i = 0; i < text.length; i++) {
+      const character = text[i];
+      if (character !== " ") {
+        count += 1;
+      }
+      returnText = returnText + character;
+      if (count >= 30) break;
+    }
+    return returnText;
+  };
+
   return (
     <div className="article">
       <div className="left" onClick={() => goToReadArticle(article.web_url)}>
-        <p className="title">{article.headline.print_headline}</p>
-        <p className="lead__paragraph">{article.lead_paragraph}</p>
+        <p className="title">{article.headline.main}</p>
+        <p className="lead__paragraph">
+          {article.abstract.replace(/ /g, "").length > 30
+            ? returnStringin30(article.abstract) + " ...more"
+            : article.abstract}
+        </p>
       </div>
       <div className="right">
         {starred ? (
