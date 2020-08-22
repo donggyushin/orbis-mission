@@ -34,7 +34,7 @@ export const addStarredArticle = (newArticle: ARTICLE) => (
 ) => {
   const starredArticles = getState().StarredArticleReducer.articles;
   starredArticles.push(newArticle);
-  console.log(starredArticles);
+
   localStorage.setItem(
     STARRED_ARTICLES_LOCALSTORAGE,
     JSON.stringify(starredArticles)

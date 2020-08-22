@@ -29,7 +29,7 @@ const Article: React.FunctionComponent<Props> = ({
 
   useEffect(() => {
     checkStarred();
-  }, []);
+  });
 
   const toggleStarred = () => {
     setStarred(!starred);
